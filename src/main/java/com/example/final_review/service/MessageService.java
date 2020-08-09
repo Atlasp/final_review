@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class MessageService {
@@ -36,6 +37,6 @@ public class MessageService {
     }
 
     public ArrayList<ChatMessage> getChatMessages() {
-        return chatMessages;
+        return this.chatMessages;
     }
 }
