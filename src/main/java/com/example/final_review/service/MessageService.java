@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class MessageService {
@@ -16,7 +15,7 @@ public class MessageService {
     @PostConstruct
     public void postConstruct() {
         System.out.println("Creating MessageService Bean");
-        this.chatMessages = new ArrayList<>();
+        this.chatMessages = new ArrayList<ChatMessage>();
     }
 
     public void addMessage(ChatForm chatForm) {
