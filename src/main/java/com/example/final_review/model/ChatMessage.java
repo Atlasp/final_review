@@ -1,15 +1,24 @@
 package com.example.final_review.model;
 
 public class ChatMessage {
-    private String message;
+    private Integer messageId;
+    private String messageText;
     private String username;
 
-    public String getMessage() {
-        return message;
+    public Integer getMessageId() {
+        return messageId;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMessageId(Integer messageId) {
+        this.messageId = messageId;
+    }
+
+    public String getMessageText() {
+        return messageText;
+    }
+
+    public void setMessageText(String messageText) {
+        this.messageText = messageText;
     }
 
     public String getUsername() {

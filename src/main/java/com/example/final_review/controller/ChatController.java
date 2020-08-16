@@ -2,6 +2,7 @@ package com.example.final_review.controller;
 
 import com.example.final_review.model.ChatForm;
 import com.example.final_review.service.MessageService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +26,8 @@ public class ChatController {
     }
 
     @PostMapping
-    public String postChatMessage(@ModelAttribute("chatForm") ChatForm chatForm, Model model) {
+    public String postChatMessage(Authentication authentication, ChatForm chatForm, Model model) {
+        chatForm.setUsername(authentication.getName());
         this.messageService.addMessage(chatForm);
         chatForm.setMessageText("");
         model.addAttribute("chatMessages", this.messageService.getChatMessages());

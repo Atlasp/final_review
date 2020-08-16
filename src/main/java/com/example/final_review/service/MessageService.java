@@ -1,5 +1,6 @@
 package com.example.final_review.service;
 
+import com.example.final_review.mapper.MessageMapper;
 import com.example.final_review.model.ChatForm;
 import com.example.final_review.model.ChatMessage;
 import org.springframework.stereotype.Service;
@@ -10,12 +11,15 @@ import java.util.ArrayList;
 @Service
 public class MessageService {
 
-    private ArrayList<ChatMessage> chatMessages;
+    private MessageMapper messageMapper;
+
+    public MessageService(MessageMapper messageMapper) {
+        this.messageMapper = messageMapper;
+    }
 
     @PostConstruct
     public void postConstruct() {
         System.out.println("Creating MessageService Bean");
-        this.chatMessages = new ArrayList<ChatMessage>();
     }
 
     public void addMessage(ChatForm chatForm) {
@@ -23,19 +27,19 @@ public class MessageService {
         newMessage.setUsername(chatForm.getUsername());
         switch (chatForm.getMessageType()) {
             case "Say":
-                newMessage.setMessage(chatForm.getMessageText());
+                newMessage.setMessageText(chatForm.getMessageText());
                 break;
             case "Shout":
-                newMessage.setMessage(chatForm.getMessageText().toUpperCase());
+                newMessage.setMessageText(chatForm.getMessageText().toUpperCase());
                 break;
             case "Whisper":
-                newMessage.setMessage(chatForm.getMessageText().toLowerCase());
+                newMessage.setMessageText(chatForm.getMessageText().toLowerCase());
                 break;
         }
-        this.chatMessages.add(newMessage);
+        this.messageMapper.addMessage(newMessage);
     }
 
     public ArrayList<ChatMessage> getChatMessages() {
-        return this.chatMessages;
+        return this.messageMapper.getAllMessages();
     }
 }
